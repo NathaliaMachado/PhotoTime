@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 
 class FotoAtualizacoes extends Component {
+
     render(){
         return (
             <section className="fotoAtualizacoes">
@@ -17,20 +18,16 @@ class FotoAtualizacoes extends Component {
 }
 
 class FotoInfo extends Component {
+
     render(){
         return (
             <div className="foto-in fo">
               <div className="foto-info-likes">
-
-                <a href="#">
-                  alots_ssa
-                </a>
-
-                ,
-
-                <a href="#">
-                  rafael_rollo
-                </a> 
+                {
+                  this.props.foto.likers.map(liker => {
+                    return (<a href="#">{liker.login},</a>)
+                  })
+                }
 
                  curtiram
              
@@ -38,22 +35,20 @@ class FotoInfo extends Component {
 
               <p className="foto-info-legenda">
                 <a className="foto-info-autor">autor </a>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est, illo?
+                {this.props.foto.comentario}
               </p>
 
               <ul className="foto-info-comentarios">
-                <li className="comentario">
-                  <a className="foto-info-autor">seguidor </a>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem ad, molestiae.
-                </li>
-                <li className="comentario">
-                  <a className="foto-info-autor">seguidor </a>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt cumque earum molestias voluptatem modi nihil sit magnam ratione eveniet distinctio magni error asperiores dignissimos tempora expedita, laborum ex soluta hic maiores veritatis deserunt.
-                </li>
-                <li className="comentario">
-                  <a className="foto-info-autor">seguidor </a>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum laudantium quae ab fuga odio delectus maiores voluptatibus sit commodi quidem.
-                </li>
+                {
+                  this.props.foto.comentarios.map(comentario => {
+                    return (
+                      <li className="comentario">
+                        <a className="foto-info-autor">{comentario.login} </a>
+                        {comentario.texto}
+                      </li>
+                    );
+                  })
+                }
               </ul>
             </div>            
         );
@@ -61,30 +56,32 @@ class FotoInfo extends Component {
 }
 
 class FotoHeader extends Component {
+
     render(){
         return (
             <header className="foto-header">
               <figure className="foto-usuario">
-                <img src="http://pm1.narvii.com/6635/024f537efdd39de883c6466ac58f5971c5b8f3eb_00.jpg" alt="foto do usuario"/>
+                <img src={this.props.foto.urlPerfil} alt="foto do usuario"/>
                 <figcaption className="foto-usuario">
                   <a href="#">
-                    alots
+                    {this.props.foto.loginUsuario}
                   </a>  
                 </figcaption>
               </figure>
-              <time className="foto-data">03/10/2016 20:13</time>
+              <time className="foto-data">{this.props.foto.horario}</time>
             </header>            
         );
     }
 }
 
-export default class Foto extends Component {
+export default class FotoItem extends Component {
+
     render(){
         return (
           <div className="foto">
-            <FotoHeader/>
-            <img alt="foto" className="foto-src" src="https://www.harley-davidson.com/content/dam/h-d/images/motorcycles/my19/softail/softail-slim/overview/dom/19-softail-softail-slim-hero.jpg"/>
-            <FotoInfo/>
+            <FotoHeader foto={this.props.foto}/>
+            <img alt="foto" className="foto-src" src={this.props.foto.urlFoto}/>
+            <FotoInfo foto={this.props.foto}/>
             <FotoAtualizacoes/>
           </div>            
         );
