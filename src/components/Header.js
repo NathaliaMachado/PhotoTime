@@ -20,7 +20,7 @@ export default class Header extends Component {
           </h1>
 
           <form className="header-busca" onSubmit={this.pesquisa.bind(this)}>
-            <input type="text" name="search" placeholder="Pesquisa" className="header-busca-campo" ref={input => this.loginPesquisado = input}/>
+            <input type="text" name="search" placeholder="Search" className="header-busca-campo" ref={input => this.loginPesquisado = input}/>
             <input type="submit" value="Buscar" className="header-busca-submit"/>
           </form>
 
@@ -31,7 +31,7 @@ export default class Header extends Component {
                 <a href="#">
                   ♡
                   {/*                 ♥ */}
-                  {/* Quem deu like nas minhas fotos */}
+                  {/* Who gave like in my photos? */}
                 </a>
               </li>
             </ul>
