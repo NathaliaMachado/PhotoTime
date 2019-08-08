@@ -1,13 +1,8 @@
 import React, { Component } from 'react';
 import Header from './components/Header';
 import Timeline from './components/Timeline';
-import {createStore,applyMiddleware,combineReducers} from 'redux';
-import thunkMiddleware from 'redux-thunk';
-import {timeline} from './reducers/timeline';
-import {notificacao} from './reducers/header';
+import PropTypes from 'prop-types';
 
-const reducers = combineReducers({timeline,notificacao});
-const store = createStore(timeline,applyMiddleware(thunkMiddleware));
 
 class App extends Component {
 
@@ -15,14 +10,18 @@ class App extends Component {
     return (
       <div id="root">
         <div className="main">
-          <Header store={store}/>
-          <Timeline login={this.props.params.login} store={store}/>
+          <Header store={this.context.store}/>
+          <Timeline login={this.props.params.login} />
         </div>
       </div>
-    )
+    );
 
   }
  
+}
+
+App.contextTypes = {
+  store : PropTypes.object.isRequired
 }
 
 export default App;
